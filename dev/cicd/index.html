@@ -113,8 +113,67 @@ aws<span class="w"> </span>configure<span class="w"> </span><span class="nb">set
 仓库配置为<code>C:\ProgramData\Jenkins\.jenkins\workspace</code>，并制定分支。</p>
 <p>2.开始构建</p>
 <p>默认克隆在<code>C:\ProgramData\Jenkins\.jenkins\workspace</code>目录下。</p>
-<h2 id="_3">高级配置</h2>
-<h5 id="_4"><a href="https://juejin.cn/post/6844904119707123719">配置构建失败时发送邮件</a></h5>
+<h2 id="gitlab"><a href="https://blog.csdn.net/GoodburghCottage/article/details/131683475">Gitlab 安装</a></h2>
+<p>Gitlab镜像拉取和安装
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>gitlab<span class="w"> </span>--restart<span class="w"> </span>always<span class="w"> </span>-p<span class="w"> </span><span class="m">9980</span>:9980<span class="w"> </span>-p<span class="w"> </span><span class="m">222</span>:22<span class="w"> </span>-v<span class="w"> </span>/usr/local/docker/gitlab/config:/etc/gitlab<span class="w"> </span>-v<span class="w"> </span>/usr/local/docker/gitlab/logs:/var/log/gitlab<span class="w"> </span>-v<span class="w"> </span>/usr/local/docker/gitlab/data:/var/opt/gitlab<span class="w"> </span>-d<span class="w"> </span>gitlab/gitlab-ce
+</code></pre></div>
+配置
+<div class="highlight"><pre><span></span><code><span class="c1"># 进入容器</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>gitlab<span class="w"> </span>bash
+
+vi<span class="w"> </span>/etc/gitlab/gitlab.rb
+<span class="c1">#gitlab访问地址，可以写域名。如果端口不写的话默认为80端口</span>
+external_url<span class="w"> </span><span class="s1">&#39;http://172.21.108.56:9980&#39;</span><span class="w"> </span>
+<span class="c1">#ssh主机ip</span>
+gitlab_rails<span class="o">[</span><span class="s1">&#39;gitlab_ssh_host&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;172.21.108.56&#39;</span>
+<span class="c1">#ssh连接端口</span>
+gitlab_rails<span class="o">[</span><span class="s1">&#39;gitlab_shell_ssh_port&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">9922</span>
+
+<span class="c1"># 重新编译gitlab配置文件</span>
+gitlab-ctl<span class="w"> </span>reconfigure
+<span class="c1"># 重启gitlab服务</span>
+gitlab-ctl<span class="w"> </span>restart
+
+<span class="c1">#退出容器</span>
+<span class="nb">exit</span>
+<span class="c1"># 重启gitlab容器</span>
+docker<span class="w"> </span>restart<span class="w"> </span>gitlab
+
+<span class="c1"># 查看初始密码</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>gitlab<span class="w"> </span>cat<span class="w"> </span>/etc/gitlab/initial_root_password
+</code></pre></div></p>
+<p>访问：<a href="http://172.21.108.56:9980/">http://172.21.108.56:9980/</a></p>
+<p>数据持久化参考 <a href="https://blog.csdn.net/qq934235475/article/details/112864332">链接</a> 。</p>
+<p>问题：<code>HTTP 502: Waiting for GitLab to boot</code></p>
+<p>错误排查：
+<div class="highlight"><pre><span></span><code>gitlab-ctl<span class="w"> </span>tail
+</code></pre></div></p>
+<h2 id="_3">虚幻引擎</h2>
+<p>根据UE4.sln找到对应的vs工程文件为<code>Engine\Intermediate\ProjectFiles\UE4.vcxproj</code>，得到构建虚幻引擎的命令为：
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe&quot;</span><span class="w"> </span>Engine<span class="se">\I</span>ntermediate<span class="se">\P</span>rojectFiles<span class="se">\U</span>E4.vcxproj
+</code></pre></div></p>
+<p>步骤同上，但是由于UnrealEngine是私有项目，在填写<code>Repository URL</code>时，需要带上github账户的Token，比如： <code>https://{token}@github.com/OpenHUTB/UnrealEngine.git</code>。</p>
+<p>拉取 <a href="https://hub.docker.com/r/twang2218/gitlab-ce-zh">中文版gitlab</a> 镜像
+<div class="highlight"><pre><span></span><code>https://hub.docker.com/r/twang2218/gitlab-ce-zh
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>hutb<span class="w"> </span>http://172.21.108.56:3000/root/UnrealEngine
+</code></pre></div>
+<h2 id="gitlabjenkins"><a href="https://blog.csdn.net/Habo_/article/details/123379435">gitlab提交代码触发Jenkins构建</a></h2>
+<p>1.Jenkins页面中，系统管理 -&gt; 插件管理 -&gt; 可选插件 -&gt; 搜索要安装的插件(<code>gitlab-plugin</code> 和　<code>Generic Webhook Trigger</code>)</p>
+<p>2.在Jenkins的UnrealEngine项目的配置中勾选<code>Generic Webhook Trigger</code> ，点 <code>Generate</code> 生成 token，这个 token 用于填写到 gitlab 的 webhook 里（防止其他人触发CICD）。按 <a href="https://blog.csdn.net/qq_31594665/article/details/136995439">链接</a> 中的说明进行设置：</p>
+<pre><code>2.1 Variable中的 Name of variable设置为：`ref`(在构建过程中需要使用到的变量名)，`Expression`设置为 `$.ref`(获取变量的值)，勾选`JSONPath`
+2.2 设置生成的 Token（要保证在Jenkins中唯一）
+2.3 Optional filter 中的 Expression为：`^(refs/heads/jenkins)$` （匹配构建条件的正则表达式），`Text`为：`$ref` （匹配的值，可使用上面配置的任意变量或组合，构建只有在此处的值与给定的正则匹配时才会触发）。
+</code></pre>
+<p>3.Gitlab的项目页面：设置-&gt;导入所有仓库-&gt;链接(URL) 中填入<code>http://172.21.108.56:8080/generic-webhook-trigger/invoke?token=TOKEN</code> （该token和Jenkins-&gt;UnrealEngine-&gt;Configuration-&gt;Triggers-&gt;Token里一致），取消<code>开启SSL证书验证</code>，点击 Test-&gt; Push events 来触发 Jeinkins 的构建。</p>
+<h5 id="urlis-blocked-requests-to-the-local-network-are-not-allowed">添加钩子时报错：<code>Urlis blocked: Requests to the local network are not allowed</code></h5>
+<blockquote>
+<p>原因：向同一台机器的IP发送请求不允许</p>
+<p>解决：Gitlab主页中的工具栏中的扳手-&gt;设置-&gt;外发请求，勾选<code>允许钩子和服务访问本地网络</code>（注意不是项目的设置）</p>
+</blockquote>
+<p>参考：<a href="https://www.cnblogs.com/jiaxzeng/p/17104250.html">Generic Webhook Trigger 插件</a></p>
+<h2 id="_4">高级配置</h2>
+<h5 id="_5"><a href="https://juejin.cn/post/6844904119707123719">配置构建失败时发送邮件</a></h5>
 <p>下载两个插件：Email Extension, Email Extension Template， 这两个插件可以帮助我们进行邮件的编写以及格式化。</p>
 <p>在Jenkins的“设置-&gt;Account”中设置邮件地址，如“123456@qq.com”</p>
 <p>在Jenkins的“Manage Jenkins -&gt; System” 中的 <code>Extended E-mail Notification</code>：</p>
@@ -127,7 +186,7 @@ aws<span class="w"> </span>configure<span class="w"> </span><span class="nb">set
 <p>将<code>Manage Jenkins -&gt; Security</code>中的<code>跨站请求伪造保护</code>中的<code>启用代理兼容</code>勾选。</p>
 </blockquote>
 <p>其中的<code>Test e-mail recipient</code>为接收方邮箱地址（QQ邮箱为发送方）。</p>
-<h2 id="_5">参考</h2>
+<h2 id="_6">参考</h2>
 <ul>
 <li><a href="http://158.109.8.172:8080">社区的持续集成地址</a></li>
 <li><a href="https://juejin.cn/post/6844904119707123719">Jenkins之Email配置与任务邮件发送实践与踩坑</a></li>
