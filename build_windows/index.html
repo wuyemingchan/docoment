@@ -140,11 +140,11 @@ pip3<span class="w"> </span>install<span class="w"> </span>--user<span class="w"
 <p>从 <a href="https://developerinsider.co/download-visual-studio-2019-web-installer-iso-community-professional-enterprise">此处</a> 获取 2019 版 Visual Studio 。选择 <strong>社区</strong> 作为免费版本。使用 <strong>Visual Studio 安装程序</strong> 安装三个附加元素： 
 <img alt="" src="../img/build/download_vs_2019.png" /></p>
 <ul>
-<li><strong>Windows 8.1 SDK.</strong> 在右侧的 <em>Installation details</em> 部分中选择它，或者转到 <em>Indivdual Components</em> 选项卡并在 <em>SDKs, libraries, and frameworks</em> 标题下查看。</li>
-<li><strong>x64 Visual C++ Toolset.</strong> 在 <em>Workloads</em> 部分中，选择 <strong>Desktop development with C++</strong> 。这将启用用于构建的 x64 命令提示符。通过按 <code>Windows</code> 按钮并搜索 <code>x64</code> 来检查它是否已正确安装。小心 <strong>不要打开<code>x86_x64</code>提示</strong>。</li>
-<li><strong>.NET framework 4.6.2</strong>. 在 <em>Workloads</em> 部分中，选择 <strong>.NET desktop development</strong> ，然后在右侧的安装详细信息面板中选择 <code>.NET Framework 4.6.2 development tools</code>。这是构建虚幻引擎所必需的。
-<img alt="" src="../img/build/vs_2019_install_options.png" /></li>
+<li><strong>.NET framework 4.6.2</strong>. 在 <em>Workloads</em> 部分中，选择 <strong>.NET 桌面开发</strong> ，然后在右侧的安装详细信息面板中选择 <code>.NET Framework 4.6.2 development tools</code>。这是构建虚幻引擎所必需的。</li>
+<li><strong>x64 Visual C++ Toolset.</strong> 在 <em>工作负载</em> 部分中，选择 <strong>使用 C++ 的桌面开发</strong> 。这将启用用于构建的 x64 命令提示符。通过按 <code>Windows</code> 按钮并搜索 <code>x64</code> 来检查它是否已正确安装。小心 <strong>不要打开<code>x86_x64</code>提示</strong>。</li>
+<li><strong>Windows 10 SDK 10.0.18362.0</strong> 在右侧的 <em>安装详细信息</em> 部分中选择它，或者转到 <em>Indivdual Components</em> 选项卡并在 <em>SDKs, libraries, and frameworks</em> 标题下查看。</li>
 </ul>
+<p><img alt="" src="../img/build/vs_2019_install_options.png" /></p>
 <div class="admonition 重要">
 <p class="admonition-title">重要</p>
 <p>其他 Visual Studio 版本可能会导致冲突。即使这些已被卸载，某些寄存器也可能仍然存在。要从计算机中彻底清除 Visual Studio，请转到<code>C:\Program Files (x86)\Microsoft Visual Studio\Installer\resources\app\layout</code>并运行 <code>.\InstallCleanup.exe -full</code>。</p>

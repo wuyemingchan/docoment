@@ -431,7 +431,12 @@ CARLA\Build\boost-1.72.0-install\lib\libboost_python 37 -vc141-mt-x64-1_72.lib
 </blockquote>
 <hr />
 <h2 id="_9">虚幻引擎</h2>
-<h3 id="unrealengineenginesourceruntimerendercoreprivaterendergraphprivatecpp180-error-c4756">UnrealEngine\Engine\Source\Runtime\RenderCore\Private\RenderGraphPrivate.cpp(180): error C4756: 常量算法中溢出</h3>
+<h5 id="error-unable-to-find-installation-of-pdbcopyexe-which-is-required-to-strip-symbols-this-tool-is-included-as-part-of-the-windows-debugging-tools-component-of-the-windows-10-sdk-httpsdevelopermicrosoftcomen-uswindowsdownloadswindows-10-sdk">执行打包时报错：ERROR: Unable to find installation of PDBCOPY.EXE, which is required to strip symbols. This tool is included as part of the 'Windows Debugging Tools' component of the Windows 10 SDK (https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk).</h5>
+<blockquote>
+<p>安装 <a href="https://pan.baidu.com/s/1Y0PQeHCMQh7Ln12d_p_Rzw">Windows Debugging Tools</a> 后重新编译
+<a href="https://download.microsoft.com/download/9/D/2/9D228A37-56C0-48D7-B1B4-486090DE7C2A/vs_Community.exe">vs2017</a></p>
+</blockquote>
+<h5 id="unrealengineenginesourceruntimerendercoreprivaterendergraphprivatecpp180-error-c4756">UnrealEngine\Engine\Source\Runtime\RenderCore\Private\RenderGraphPrivate.cpp(180): error C4756: 常量算法中溢出</h5>
 <p>出错代码：<code>return FLinearColor(INFINITY, INFINITY, INFINITY, INFINITY);</code></p>
 <blockquote>
 <p>分析：

@@ -113,11 +113,11 @@ aws<span class="w"> </span>configure<span class="w"> </span><span class="nb">set
 仓库配置为<code>C:\ProgramData\Jenkins\.jenkins\workspace</code>，并制定分支。</p>
 <p>2.开始构建</p>
 <p>默认克隆在<code>C:\ProgramData\Jenkins\.jenkins\workspace</code>目录下。</p>
-<h2 id="gitlab"><a href="https://blog.csdn.net/GoodburghCottage/article/details/131683475">Gitlab 安装</a></h2>
+<h2 id="gitlab"><a href="https://hub.docker.com/r/twang2218/gitlab-ce-zh">Gitlab 安装</a></h2>
 <p>Gitlab镜像拉取和安装
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>gitlab<span class="w"> </span>--restart<span class="w"> </span>always<span class="w"> </span>-p<span class="w"> </span><span class="m">9980</span>:9980<span class="w"> </span>-p<span class="w"> </span><span class="m">222</span>:22<span class="w"> </span>-v<span class="w"> </span>/usr/local/docker/gitlab/config:/etc/gitlab<span class="w"> </span>-v<span class="w"> </span>/usr/local/docker/gitlab/logs:/var/log/gitlab<span class="w"> </span>-v<span class="w"> </span>/usr/local/docker/gitlab/data:/var/opt/gitlab<span class="w"> </span>-d<span class="w"> </span>gitlab/gitlab-ce
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">3000</span>:80<span class="w"> </span>twang2218/gitlab-ce-zh:11.1.4
 </code></pre></div>
-配置
+配置(不适合中文版)
 <div class="highlight"><pre><span></span><code><span class="c1"># 进入容器</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>gitlab<span class="w"> </span>bash
 
@@ -158,6 +158,10 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 </code></pre></div></p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>hutb<span class="w"> </span>http://172.21.108.56:3000/root/UnrealEngine
 </code></pre></div>
+<div class="admonition 注意">
+<p class="admonition-title">注意</p>
+<p>虚幻引擎编译命令参考 <a href="https://www.cnblogs.com/kekec/p/8684068.html">链接</a></p>
+</div>
 <h2 id="gitlabjenkins"><a href="https://blog.csdn.net/Habo_/article/details/123379435">gitlab提交代码触发Jenkins构建</a></h2>
 <p>1.Jenkins页面中，系统管理 -&gt; 插件管理 -&gt; 可选插件 -&gt; 搜索要安装的插件(<code>gitlab-plugin</code> 和　<code>Generic Webhook Trigger</code>)</p>
 <p>2.在Jenkins的UnrealEngine项目的配置中勾选<code>Generic Webhook Trigger</code> ，点 <code>Generate</code> 生成 token，这个 token 用于填写到 gitlab 的 webhook 里（防止其他人触发CICD）。按 <a href="https://blog.csdn.net/qq_31594665/article/details/136995439">链接</a> 中的说明进行设置：</p>
@@ -173,6 +177,17 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 </blockquote>
 <p>参考：<a href="https://www.cnblogs.com/jiaxzeng/p/17104250.html">Generic Webhook Trigger 插件</a></p>
 <h2 id="_4">高级配置</h2>
+<h5 id="gitlab_1">将运行中的gitlab容器打包为镜像</h5>
+<p>1.将运行中的Docker容器保存为镜像
+<div class="highlight"><pre><span></span><code><span class="c1"># 容器ID使用 docker ps 查看</span>
+docker<span class="w"> </span>commit<span class="w"> </span>&lt;容器ID或名称&gt;<span class="w"> </span>&lt;镜像名称&gt;:&lt;标签&gt;<span class="w"> </span>
+</code></pre></div></p>
+<p>2.将镜像保存为tar文件
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>save<span class="w"> </span>-o<span class="w"> </span>&lt;tar文件名&gt;.tar<span class="w"> </span>&lt;镜像名称&gt;:&lt;标签&gt;
+</code></pre></div></p>
+<p>3.将镜像tar文件复制到本地
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>load<span class="w"> </span>-i<span class="w"> </span>&lt;tar文件名&gt;.tar
+</code></pre></div></p>
 <h5 id="_5"><a href="https://juejin.cn/post/6844904119707123719">配置构建失败时发送邮件</a></h5>
 <p>下载两个插件：Email Extension, Email Extension Template， 这两个插件可以帮助我们进行邮件的编写以及格式化。</p>
 <p>在Jenkins的“设置-&gt;Account”中设置邮件地址，如“123456@qq.com”</p>
