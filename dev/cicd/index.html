@@ -164,12 +164,11 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 </div>
 <h2 id="gitlabjenkins"><a href="https://blog.csdn.net/Habo_/article/details/123379435">gitlab提交代码触发Jenkins构建</a></h2>
 <p>1.Jenkins页面中，系统管理 -&gt; 插件管理 -&gt; 可选插件 -&gt; 搜索要安装的插件(<code>gitlab-plugin</code> 和　<code>Generic Webhook Trigger</code>)</p>
-<p>2.在Jenkins的UnrealEngine项目的配置中勾选<code>Generic Webhook Trigger</code> ，点 <code>Generate</code> 生成 token，这个 token 用于填写到 gitlab 的 webhook 里（防止其他人触发CICD）。按 <a href="https://blog.csdn.net/qq_31594665/article/details/136995439">链接</a> 中的说明进行设置：</p>
-<pre><code>2.1 Variable中的 Name of variable设置为：`ref`(在构建过程中需要使用到的变量名)，`Expression`设置为 `$.ref`(获取变量的值)，勾选`JSONPath`
-2.2 设置生成的 Token（要保证在Jenkins中唯一）
-2.3 Optional filter 中的 Expression为：`^(refs/heads/jenkins)$` （匹配构建条件的正则表达式），`Text`为：`$ref` （匹配的值，可使用上面配置的任意变量或组合，构建只有在此处的值与给定的正则匹配时才会触发）。
-</code></pre>
-<p>3.Gitlab的项目页面：设置-&gt;导入所有仓库-&gt;链接(URL) 中填入<code>http://172.21.108.56:8080/generic-webhook-trigger/invoke?token=TOKEN</code> （该token和Jenkins-&gt;UnrealEngine-&gt;Configuration-&gt;Triggers-&gt;Token里一致），取消<code>开启SSL证书验证</code>，点击 Test-&gt; Push events 来触发 Jeinkins 的构建。</p>
+<p>2.在<strong>接收方</strong>，即Jenkins项目（比如UnrealEngine）的配置中勾选<code>Generic Webhook Trigger</code> ，点 <code>Generate</code> 生成 token，这个 token 用于填写到 gitlab 的 webhook 里（防止其他人触发CICD）。按 <a href="https://blog.csdn.net/qq_31594665/article/details/136995439">链接</a> 中的说明进行设置：</p>
+<p>2.1 在 Post content parameters 中定义post请求的变量。Variable中的 Name of variable设置为：<code>ref</code>(在构建过程中需要使用到的变量名)，<code>Expression</code>设置为 <code>$.ref</code>(获取变量的值)，勾选 <code>JSONPath</code></p>
+<p>2.2 设置生成的 Token（自己设置，要保证在 Jenkins 中唯一，在第三步中URL中使用）</p>
+<p>2.3 Optional filter 中的 Expression为：<code>^(refs/heads/hutb)$</code> （匹配构建条件的正则表达式，这里的hutb是匹配的分支名，可根据实际的分支名情况修改），<code>Text</code>为：<code>$ref</code> （匹配的值，可使用上面配置的任意变量或组合，构建只有在此处的值与给定的正则匹配时才会触发）。</p>
+<p>3.在<strong>请求方</strong>，即Gitlab的项目页面：设置-&gt;导入所有仓库-&gt;链接(URL) 中填入<code>http://172.21.108.56:8080/generic-webhook-trigger/invoke?token=TOKEN</code> （该token和上面第2.2步Jenkins-&gt;UnrealEngine-&gt;Configuration-&gt;Triggers-&gt;Token里一致），取消<code>开启SSL证书验证</code>，点击 Test-&gt; Push events 来触发 Jeinkins 的构建。</p>
 <h5 id="urlis-blocked-requests-to-the-local-network-are-not-allowed">添加钩子时报错：<code>Urlis blocked: Requests to the local network are not allowed</code></h5>
 <blockquote>
 <p>原因：向同一台机器的IP发送请求不允许</p>
@@ -177,6 +176,8 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 </blockquote>
 <p>参考：<a href="https://www.cnblogs.com/jiaxzeng/p/17104250.html">Generic Webhook Trigger 插件</a></p>
 <h2 id="_4">高级配置</h2>
+<h5 id="_5">清除历史的构建的包</h5>
+<p>每次所构建的包位于<code>存放的路径是jobs/JOB_NAME/builds/BUILD_NUMBER/archive</code>，比如：<code>C:\ProgramData\Jenkins\.jenkins\jobs\carla\builds</code>，可能非常大，需要定时清除。</p>
 <h5 id="gitlab_1">将运行中的gitlab容器打包为镜像</h5>
 <p>1.将运行中的Docker容器保存为镜像
 <div class="highlight"><pre><span></span><code><span class="c1"># 容器ID使用 docker ps 查看</span>
@@ -188,7 +189,7 @@ docker<span class="w"> </span>commit<span class="w"> </span>&lt;容器ID或名�
 <p>3.将镜像tar文件复制到本地
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>load<span class="w"> </span>-i<span class="w"> </span>&lt;tar文件名&gt;.tar
 </code></pre></div></p>
-<h5 id="_5"><a href="https://juejin.cn/post/6844904119707123719">配置构建失败时发送邮件</a></h5>
+<h5 id="_6"><a href="https://juejin.cn/post/6844904119707123719">配置构建失败时发送邮件</a></h5>
 <p>下载两个插件：Email Extension, Email Extension Template， 这两个插件可以帮助我们进行邮件的编写以及格式化。</p>
 <p>在Jenkins的“设置-&gt;Account”中设置邮件地址，如“123456@qq.com”</p>
 <p>在Jenkins的“Manage Jenkins -&gt; System” 中的 <code>Extended E-mail Notification</code>：</p>
@@ -201,7 +202,7 @@ docker<span class="w"> </span>commit<span class="w"> </span>&lt;容器ID或名�
 <p>将<code>Manage Jenkins -&gt; Security</code>中的<code>跨站请求伪造保护</code>中的<code>启用代理兼容</code>勾选。</p>
 </blockquote>
 <p>其中的<code>Test e-mail recipient</code>为接收方邮箱地址（QQ邮箱为发送方）。</p>
-<h2 id="_6">参考</h2>
+<h2 id="_7">参考</h2>
 <ul>
 <li><a href="http://158.109.8.172:8080">社区的持续集成地址</a></li>
 <li><a href="https://juejin.cn/post/6844904119707123719">Jenkins之Email配置与任务邮件发送实践与踩坑</a></li>
