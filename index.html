@@ -45,7 +45,7 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#_2">简介 </a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#_3">入门 </a>
+    <li class="toctree-l3"><a class="reference internal" href="#_3">基础 </a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#_4">车辆 </a>
     </li>
@@ -53,7 +53,7 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_6">模拟器 </a>
+    <li class="toctree-l2"><a class="reference internal" href="#_6">模拟 </a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#_7">概念 </a>
     </li>
@@ -63,7 +63,7 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_10">模拟场景  </a>
+    <li class="toctree-l2"><a class="reference internal" href="#_10">场景  </a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#_11">地图孪生 </a>
     </li>
@@ -113,8 +113,7 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="_1"><a href="https://carla.readthedocs.io/en/latest/">人车模拟</a></h1>
-<p>欢迎使用人车模拟文档，该页面包含所有内容的索引。运行 <a href="#primary">入门</a> 示例后可以按自己喜欢的顺序随意阅读（可使用 <a href="software/llm/">DeepSeek大模型</a> 来辅助开发）。默认为打开 UE 4.26 的 Carla 文档，支持 UE 5.5 的 Carla 文档请查看 <a href="ue5/">链接</a> 。</p>
-<p>如果对文档中的任何问题可以在 <a href="https://github.com/OpenHUTB/doc">本文档的源码仓库</a> 中的 <a href="https://github.com/OpenHUTB/doc/issues">Issues</a> 页面进行提问或者提交 <a href="https://zhuanlan.zhihu.com/p/153381521">Pull Request</a> 直接修改文档。</p>
+<p>欢迎使用人车模拟文档，该页面包含所有内容的索引。阅读 <a href="#primary">基础</a> 部分相关内容后可以按自己喜欢的顺序随意阅读。</p>
 <ul>
 <li><a href="#primary"><strong>简介</strong></a>  <ul>
 <li><a href="#introduction">入门</a></li>
@@ -144,16 +143,19 @@
 </ul>
 <hr />
 <h2 id="_2">简介 <span id="introduction"></span></h2>
+<p><strong>入门示例</strong></p>
 <ol>
-<li>下载 <a href="https://pan.baidu.com/s/1n2fJvWff4pbtMe97GOqtvQ?pwd=hutb">链接</a> 中的<code>software/hutb</code>中的文件并解压；</li>
-<li>运行<code>WindowsNoEditor</code>文件夹下的<code>CarlaUE4.exe</code>启动场景，进入场景后按<code>W</code>、<code>S</code>、<code>A</code>、<code>D</code>移动场景视角；</li>
-<li>使用<code>pip install hutb</code> 安装Python功能包（或者安装<code>WindowsNoEditor/PythonAPI/carla/dist/hutb-*.whl</code>），然后运行脚本 <a href="https://github.com/OpenHUTB/doc/blob/master/src/examples/generate_traffic.py">generate_traffic.py</a> 在场景中生成交通流和运行 <a href="https://github.com/OpenHUTB/doc/blob/master/src/examples/manual_control.py">python manual_control.py</a> 生成一辆键盘控制的车。</li>
+<li>
+<p>下载 <a href="https://pan.baidu.com/s/1n2fJvWff4pbtMe97GOqtvQ?pwd=hutb">链接</a> 中的<code>software/car/DReyeVR/hutb_*.zip</code>并解压；</p>
+</li>
+<li>
+<p>运行<code>WindowsNoEditor</code>文件夹下的<code>CarlaUE4.exe</code>启动场景，按<code>W</code>、<code>S</code>、<code>A</code>、<code>D</code> 进行操作；</p>
+</li>
+<li>
+<p>使用<code>pip install hutb</code> 安装 Python 功能包（或者使用 pip 安装<code>PythonAPI/carla/dist/hutb-*.whl</code>），然后运行<code>PythonAPI/examples</code>中的脚本： <a href="https://github.com/OpenHUTB/doc/blob/master/src/examples/generate_traffic.py">generate_traffic.py</a> 生成交通流、<a href="https://github.com/OpenHUTB/doc/blob/master/src/examples/manual_control.py">manual_control.py</a> 生成一辆键盘控制的车。如果运行报错，请参考 <a href="faq/use_faq/">解决方法</a>。</p>
+</li>
 </ol>
-<div class="admonition 注意">
-<p class="admonition-title">注意</p>
-<p>当机器性能一般时启动<code>CarlaUE4.exe</code>报错：<code>Out of video memory...</code>，可以通过命令来降低画质启动：<code>CarlaUE4.exe -quality-level=Low</code>，以获得更流畅的效果；甚至使用<code>CarlaUE4.exe -nullrhi</code>禁用所有渲染（无需 GPU）。如果运行CarlaUE4.exe时候报错：缺少Microsoft Visual C++ Runtime、DirectX Runtime，则需要安装 <a href="https://visualstudio.microsoft.com/zh-hans/vs/older-downloads/">vs_community__2019.exe</a> （勾选<code>.NET桌面开发</code>和<code>使用C++的桌面开发</code>）和 <a href="https://www.microsoft.com/zh-CN/download/details.aspx?id=8109">directx_Jun2010_redist.zip</a>  （解压后运行<code>DXSETUP.bat</code>）。如果发现手动控制车按前进键不能移动，可能是输入法默认是中文，按<code>Shift</code>切换成英文输入法即可解决。</p>
-</div>
-<h3 id="_3">入门 <span id="primary"></span></h3>
+<h3 id="_3">基础 <span id="primary"></span></h3>
 <p><a href="start_introduction/"><strong>介绍</strong></a> — 对 Carla 的期望</p>
 <p><a href="start_quickstart/"><strong>快速启动</strong></a> — 获取 Carla 版本</p>
 <p><a href="tuto_first_steps/"><strong>第一步</strong></a> — 开始进行 Carla 操作，介绍最重要的概念</p>
@@ -168,7 +170,7 @@
 <p><a href="core_sensors/"><strong>第四、传感器和数据</strong></a> — 使用传感器检索模拟数据</p>
 <p><a href="tuto_G_retrieve_data/"><strong>检索模拟数据</strong></a> — 使用记录器正确收集数据的分步指南</p>
 <p><a href="tuto_G_bounding_boxes/"><strong>边界框</strong></a> — 将  Carla 对象的边界框投影到相机中</p>
-<p><a href="faq/use_faq/"><strong>使用常见问题</strong></a> — 一些最常见的使用问题</p>
+<p><a href="faq/use_faq/"><strong>使用常见问题</strong></a> — 解决最常见的使用问题</p>
 <h3 id="_4">车辆 <span id="vehicle"></span></h3>
 <!-- 车辆代理：单个 -> 多个 -->
 
@@ -194,7 +196,7 @@
 <p><a href="interbehavior/"><strong>行为交互</strong></a> — 针对行为和交互研究的虚拟现实驾驶仿真器</p>
 <p><a href="pedestrian/tuto_content_chrono_opensim/"><strong>行人物理场模拟</strong></a> — Chrono OpenSim 解析器</p>
 <hr />
-<h2 id="_6">模拟器 <span id="simulator"></span></h2>
+<h2 id="_6">模拟 <span id="simulator"></span></h2>
 <h3 id="_7">概念 <span id="concept"></span></h3>
 <!-- Carla 原理 -->
 
@@ -229,7 +231,7 @@
 <p><a href="dev/custom_dev/"><strong>湖工商分支</strong></a> - 在原分支的基础上开发自定义的功能</p>
 <p><a href="tuto_D_windows_debug/"><strong>调试程序</strong></a> — 进行C++程序的调试</p>
 <hr />
-<h2 id="_10">模拟场景  <span id="scene"></span></h2>
+<h2 id="_10">场景  <span id="scene"></span></h2>
 <h3 id="_11">地图孪生 <span id="map_twin"></span></h3>
 <!-- 地图、建筑等静态资产 -->
 
@@ -295,6 +297,8 @@
 <p><a href="ecosys_simready/"><strong>NVIDIA Omniverse 的 SimReady</strong></a> - 为模拟而构建的三维内容，简化模拟三维虚拟环境的内容创建管道</p>
 <p><a href="https://docs.blender.org/manual/zh-hans/latest/"><strong>Blender 手册</strong></a> — 数字内容创作（Digital Content Creation, DCC）软件操作说明</p>
 <p><a href="third/"><strong>Carla 相关的第三方链接</strong></a> — 中文交流社区</p>
+<p><a href="ue5/"><strong>UE 5.5 的 Carla 文档</strong></a> - 基于 UE5.5 的相关功能代码，不作为该文档描述的主要内容</p>
+<p><a href="software/llm/"><strong>DeepSeek大模型</strong></a> - 部署本地大模型的流程，可用于辅助开发</p>
 <p><a href="todo/"><strong>待做列表</strong></a> — 待完成的功能</p>
 <p><a href="used_by/"><strong>应用Carla的仓库列表</strong></a> - 收集引用了Carla的相关库</p>
 <h3 id="_17">基准测试 <span id="test"></span></h3>
@@ -310,6 +314,7 @@
 <p><a href="cont_coding_standard/"><strong>编码标准</strong></a> — 编写正确代码的指南</p>
 <p><a href="cont_doc_standard/"><strong>文档标准</strong></a> — 编写适当文档的指南</p>
 <p><a href="tuto_D_make_release/"><strong>发布版本</strong></a> — 如何发布 Carla</p>
+<p>如果对文档中的任何问题可以在 <a href="https://github.com/OpenHUTB/doc">本文档的源码仓库</a> 中的 <a href="https://github.com/OpenHUTB/doc/issues">问题</a> 页面讨论或者提交 <a href="https://zhuanlan.zhihu.com/p/153381521">拉取请求</a> 直接修改文档。</p>
               
             </div>
           </div><footer>
@@ -364,5 +369,5 @@
 
 <!--
 MkDocs version : 1.5.3
-Build Date UTC : 2025-07-04 07:14:28.768797+00:00
+Build Date UTC : 2025-07-04 09:48:28.886542+00:00
 -->
