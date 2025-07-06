@@ -115,6 +115,19 @@ git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </
 <p>2.打开页面右边<code>...</code>中的<code>Open in Source</code></p>
 <p>3.在新页面中的<code>...</code>中打开<code>Open raw</code></p>
 <p>4.下载并覆盖本地的文件</p>
+<h2 id="dev">使用dev分支开发</h2>
+<h3 id="dev_1">删除dev分支</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 位于dev分支，切换到其他分支</span>
+git<span class="w"> </span>checkout<span class="w"> </span>hutb
+<span class="c1"># 删除dev分支</span>
+git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span>dev
+<span class="c1"># 删除远程分支</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>--delete<span class="w"> </span>dev
+git<span class="w"> </span>push<span class="w"> </span>hutb<span class="w"> </span>--delete<span class="w"> </span>dev
+<span class="c1"># 新建dev分支</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>dev
+git<span class="w"> </span>push<span class="w"> </span>hutb
+</code></pre></div>
 <h2 id="_3">其他</h2>
 <h5 id="_4">使用旧仓库存放新的提交记录</h5>
 <blockquote>
