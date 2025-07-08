@@ -267,7 +267,38 @@ export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI/carla
 <h2 id="windows_1">Windows 构建</h2>
 <!-- ======================================================================= -->
 
-<h6 id="make-nothing-to-be-done-for-check">[make: Nothing to be done for `check'.]</h6>
+<h6 id="vs2022boost-1800-install_boost-b2-error-an-error-ocurred-while-installing-using-b2exe">升级到vs2022后，编译boost-1.80.0报错：<a href="https://github.com/boostorg/boost/issues/914#issuecomment-2327689539">-[install_boost]: [B2 ERROR] An error ocurred while installing using "b2.exe".</a></h6>
+<blockquote>
+<p>将 boost 版本从 1.80.0 升级到 1.86.0 可以解决（可以生成lib中的文件）</p>
+<p>分析过程：</p>
+<p><code>.\Util\InstallersWin\install_boost.bat --build-dir "D:\work\workspace\carla\Build" --toolset msvc-14.3 --version 1.80.0 -j 8</code>报错</p>
+<p>进入目录<code>Build\boost-1.80.0-source\</code>，运行<code>Build\boost-1.80.0-source\b2.exe address-model=64 architecture=x86</code>成功</p>
+</blockquote>
+<p>提取出实际运行报错的命令为：
+<div class="highlight"><pre><span></span><code><span class="c1"># 先生成构建文件b2.exe</span>
+call<span class="w"> </span>bootstrap.bat<span class="w"> </span>vc143
+<span class="c1"># 编译和安装</span>
+b2<span class="w"> </span>-j8<span class="w"> </span>headers<span class="w"> </span>--layout<span class="o">=</span>versioned<span class="w"> </span>--build-dir<span class="o">=</span>.<span class="se">\b</span>uild<span class="w">    </span>--with-system<span class="w"> </span>--with-filesystem<span class="w"> </span>--with-python<span class="w"> </span>--with-date_time<span class="w"> </span><span class="nv">architecture</span><span class="o">=</span>x86<span class="w">     </span>address-model<span class="o">=</span><span class="m">64</span><span class="w"> </span><span class="nv">toolset</span><span class="o">=</span>msvc-14.3<span class="w"> </span><span class="nv">variant</span><span class="o">=</span>release<span class="w"> </span><span class="nv">link</span><span class="o">=</span>static<span class="w"> </span>runtime-link<span class="o">=</span>shared<span class="w"> </span><span class="nv">threading</span><span class="o">=</span>multi<span class="w"> </span>--prefix<span class="o">=</span><span class="s2">&quot;D:\work\workspace\carla\Build\boost-1.80.0-install&quot;</span><span class="w"> </span>--libdir<span class="o">=</span><span class="s2">&quot;D:\work\workspace\carla\Build\boost-1.80.0-install\lib&quot;</span><span class="w"> </span>--includedir<span class="o">=</span><span class="s2">&quot;D:\work\workspace\carla\Build\boost-1.80.0-install&quot;</span><span class="w"> </span>install
+</code></pre></div>
+检测到报错是返回值<code>%errorlevel%</code>为1，安装的目录中头文件的文件名不对、Lib中的库文件没有生成。</p>
+<p><a href="https://www.bfgroup.xyz/b2/tutorial.html">解读</a> ：b2 headers ： 生成头文件</p>
+<p><code>--layout=&lt;layout&gt;</code>：确定是否选择库名称和头文件位置，以便在同一系统上可以使用多个版本的 Boost 或多个编译器。</p>
+<pre><code>versioned: Boost 二进制文件的名称包含 Boost 版本号、编译器的名称和版本以及编码的构建属性。Boost 头文件安装在 &lt;HDRDIR&gt; 的子目录中，该子目录的名称包含 Boost 版本号。
+
+tagged: Boost 二进制文件的名称包含编码的构建属性，例如变体和线程模型，但不包含编译器名称和版本，也不包含 Boost 版本。如果您使用相同的编译器构建多个 Boost 变体，此选项很有用。
+
+system: 二进制文件的名称中不包含 Boost 版本号或编译器的名称及版本号。Boost 头文件会直接安装到 &lt;HDRDIR&gt; 目录下。这个选项是专为系统集成商构建的分发包而设计。
+
+在 Windows 系统中，默认值为“versioned”，而在 Unix 系统中则为“system”。
+</code></pre>
+<p><code>address-model=64</code>：生成 16 位、32 位或 64 位代码。（可选值为 16, 32, 64, 32_64）</p>
+<p><code>toolset</code>: 在条件属性中使用此功能，若某些特性取决于工具集则适用。</p>
+<p><code>runtime-link=shared</code>：链接到单线程或线程安全的运行时库。（shared, static）</p>
+<p><code>--with-python</code>: 仅编译 python。<code>b2.exe --show-libraries</code> 查看 Boost 包含的所有库</p>
+<div class="highlight"><pre><span></span><code>set PYTHON_ROOT=C:\\Users\\Administrator\\.conda\\envs\\carla_dev\\python.exe
+set PYTHON_VERSION=3.7
+</code></pre></div>
+<h6 id="make-nothing-to-be-done-for-check"><a href="">make: Nothing to be done for `check'.</a></h6>
 <blockquote>
 <p>Windows.mk中check:标签下一行前面应该是Tab键而不是4个空格。
 check:
@@ -609,6 +640,11 @@ make:<span class="w"> </span>***<span class="w"> </span><span class="o">[</span>
 <h2 id="_13">其他</h2>
 <!-- ======================================================================= -->
 
+<h6 id="hutb">每次打开后都需要进入hutb目录，比较麻烦</h6>
+<blockquote>
+<p>通过搜索找到<code>x64 Native Tools Command Prompt for VS 2022</code>的快捷方式，右键，在<code>目标(T)</code>中添加进入目录的参数，成为：</p>
+<p><code>%comspec% /k "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat" &amp;&amp; D: &amp;&amp; cd D:\work\workspace\carla</code></p>
+</blockquote>
 <h6 id="fatal-error-versionh-has-been-modified-since-the-precompiled-header">Fatal error: 'version.h' has been modified since the precompiled header. <span id="fatal-error-versionh-has-been-modified-since-the-precompiled-header"></span></h6>
 <blockquote>
 <p>由于 Linux 更新，这种情况时常发生。Makefile 中有一个针对此问题的特殊目标。虽然花了很长时间，但解决了问题： </p>
