@@ -106,7 +106,29 @@ PIE的意思是：Play，玩。你做的游戏是如何让玩家操控游玩的�
 <p>PIE和SIE切换
 在PIE模式下，shift + F1可以获得鼠标控制权（一般第一人称第三人称下鼠标用于旋转方向摄像头，不会出现光标）。然后点击工具栏的弹出（Eject）可以切换到SIE</p>
 <p>你也可以点击 控制（Possess） 功能的快捷键（F10）来从在编辑器中模拟（SIE）切换到在编辑器中运行（PIE）。</p>
-<h2 id="_7">参考链接</h2>
+<h2 id="_7">加速构建过程</h2>
+<p>每次执行hutb的make的操作时，都会出现
+<div class="highlight"><pre><span></span><code>Using &#39;git status&#39; to determine working set for adaptive non-unity build (D:\work\workspace\UnrealEngine).
+Waiting for &#39;git status&#39; command to complete
+Target is up to date
+Total execution time: 2.38 seconds
+</code></pre></div>
+可以 <a href="https://github.com/adamrehn/ue4-docker/commit/9cf1375c33098a2787b5f514fd0ff36167a12b96">移除虚幻引擎的<code>.git</code>目录</a> 来禁用 UBT 的 <code>git status</code> 调用，达到加速构建流程的作用。</p>
+<p>此功能用于从 Unity 构建中排除大多数迭代文件。这应该会降低编译速度（如果你经常构建引擎，这个功能确实很有用，但大多数情况下并非如此）。</p>
+<p>要禁用此行为，您可以更改 <code>Engine\Saved\UnrealBuildTool\BuildConfiguration.xml</code> 里的<code>&lt;Configuration&gt; &lt;/Configuration&gt;</code>中添加：
+<div class="highlight"><pre><span></span><code>  &lt;SourceFileWorkingSet&gt; 
+    &lt;Provider&gt;None&lt;/Provider&gt; 
+    &lt;RepositoryPath&gt;&lt;/RepositoryPath&gt; 
+    &lt;GitPath&gt;&lt;/GitPath&gt; 
+  &lt;/SourceFileWorkingSet&gt;
+</code></pre></div>
+改后生效，但是报错：
+<div class="highlight"><pre><span></span><code>Creating makefile for CarlaUE4Editor (BuildConfiguration.xml is newer)
+UnrealBuildTool: WARNING: No Visual C++ installation was found. Please download and install Visual Studio 2017 with C++ components.
+UnrealBuildTool: ERROR: Visual Studio 2019 must be installed in order to build this target.
+make: *** [CarlaUE4Editor] 错误 6
+</code></pre></div></p>
+<h2 id="_8">参考链接</h2>
 <ul>
 <li>
 <p><a href="https://www.bilibili.com/video/BV164411Y732/?share_source=copy_web&amp;vd_source=d956d8d73965ffb619958f94872d7c57">UE4初学者系列教程合集-全中文新手入门教程</a></p>
