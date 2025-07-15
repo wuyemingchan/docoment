@@ -71,7 +71,7 @@
                 <h1 id="_1">虚拟现实的实现</h1>
 <p>配置文件 <code>Unreal/CarlaUE4/Config/DReyeVRConfig.ini</code> 中的 <code>CameraPose</code>配置了相机的初始位置。</p>
 <h2 id="_2">配置</h2>
-<p>默认的引擎配置在<code>carla\Unreal\CarlaUE4\Config/DefaultEngine.ini</code>文件中进行修改：
+<p>默认的引擎配置在<code>carla\Unreal\CarlaUE4\Config\DefaultEngine.ini</code>文件中进行修改：
 <div class="highlight"><pre><span></span><code><span class="c1"># 传统模式</span>
 <span class="c1"># GlobalDefaultServerGameMode=/Game/Carla/Blueprints/Game/CarlaGameMode.CarlaGameMode_C</span>
 <span class="c1"># 默认的游戏模式（VR模式，区别于传统模式），运行的脚本位于：carla\Unreal\CarlaUE4\Source\CarlaUE4\DReyeVR\DReyeVRGameMode.cpp</span>
@@ -81,6 +81,7 @@
 <h2 id="_3">分析</h2>
 <p>玩家控制器（PlayerController）负责指挥棋子（Pawn），而 Pawn 的占有需要指定 PlayerController。</p>
 <h2 id="_4">在最新的版本上编译</h2>
+<p>解决问题的过程：</p>
 <p>InputComponent != nullptr是空</p>
 <p>解决：<code>Unreal/CarlaUE4/Source/CarlaUE4/DReyeVR/DReyeVRPawn.cpp</code></p>
 <div class="highlight"><pre><span></span><code>void<span class="w"> </span>ADReyeVRPawn::BeginEgoVehicle<span class="o">(</span>AEgoVehicle<span class="w"> </span>*Vehicle,<span class="w"> </span>UWorld<span class="w"> </span>*World<span class="o">)</span>
@@ -161,6 +162,8 @@ Expression: (bytes)==(sizeof(message_size_type) +message-&gt;size())
 即<code>carla\LibCarla\source\carla\streaming\detail\tcp\ServerSession.cpp</code>中的这一行报错：
 <div class="highlight"><pre><span></span><code><span class="n">DEBUG_ASSERT_EQ</span><span class="p">(</span><span class="n">bytes</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">message_size_type</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">message</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
 </code></pre></div></p>
+<h2 id="_5">各个模块</h2>
+<h3 id="_6">头显模块</h3>
               
             </div>
           </div><footer>
