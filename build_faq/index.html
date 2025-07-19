@@ -279,6 +279,12 @@ build\lib.win-amd64-cpython-37\carla\libcarla.cp37-win_amd64.pyd : fatal error L
 error: command &#39;C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX86\\x64\\link.exe&#39; failed with exit code 1169
 </code></pre></div>
 解决：删除<code>boost-1.86.0-install</code>和<code>boost-1.86.0-source</code>后重新构建，只删除<code>boost-1.86.0-install</code>不行。</p>
+<h6 id="chrono"><a href="">Chrono库找不到</a></h6>
+<p>报错信息：
+<div class="highlight"><pre><span></span><code>UnrealBuildTool: ERROR: Unhandled exception: Source file &#39;C:\ProgramData\Jenkins\.jenkins\workspace\carla\Unreal\CarlaUE4\Plugins\Carla\CarlaDependencies\dll\ChronoEngine.dll&#39; does not exist
+                        while creating runtime dependencies for module &#39;Carla&#39;
+</code></pre></div>
+编译目录<code>Build/chrono-install</code>目录为空，原因是源代码下载失败。</p>
 <h6 id="cicd-whl">CICD 时找不到.whl文件</h6>
 <p>报错信息：
 <div class="highlight"><pre><span></span><code>(carla_dev) C:\ProgramData\Jenkins\.jenkins\workspace\carla&gt;chcp 65001 

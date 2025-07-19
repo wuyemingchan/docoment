@@ -69,14 +69,18 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="_1">虚幻引擎</h1>
-<h2 id="_2">蓝图</h2>
+<h2 id="_2">文档</h2>
+<h3 id="_3">理解基础概念</h3>
+<h4 id="_4">关卡</h4>
+<p><a href="https://openhutb.github.io/engine_doc/zh-CN/Basics/Levels/HowTo/ChangeDefaultLevel/index.html">更改默认关卡</a></p>
+<h2 id="_5">蓝图</h2>
 <ul>
 <li><a href="https://dev.epicgames.com/documentation/zh-cn/unreal-engine/blueprints-quick-start-guide?application_version=4.27">蓝图快速入门指南</a></li>
 <li><a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/possessing-pawns?application_version=4.27">持有棋子</a></li>
 </ul>
-<h2 id="_3">编程</h2>
+<h2 id="_6">编程</h2>
 <p><a href="https://github.com/CarlaUnreal/UnrealEngine/pull/38/files"><code>class ENGINE_API</code></a> 是一个宏，用于控制类的导出行为，确保类在不同模块（DLL或共享库）之间正确使用。</p>
-<h2 id="_4">杂项</h2>
+<h2 id="_7">杂项</h2>
 <ul>
 <li><a href="../syntax/">语法</a></li>
 <li><a href="../pixel_streaming/">像素流推送</a></li>
@@ -87,12 +91,12 @@
 <li><a href="../shader/">着色器</a></li>
 <li><a href="../unreal_editor/">虚幻编辑器</a></li>
 </ul>
-<h2 id="_5">源代码分析</h2>
+<h2 id="_8">源代码分析</h2>
 <ul>
 <li><a href="https://zhuanlan.zhihu.com/p/637746453">USkeletalMeshComponent</a></li>
 <li><a href="https://dev.epicgames.com/documentation/zh-cn/unreal-engine/actor-lifecycle?application_version=4.27">Actor生命周期</a></li>
 </ul>
-<h2 id="_6">其他</h2>
+<h2 id="_9">其他</h2>
 <ul>
 <li><a href="https://blog.csdn.net/qq_43497224/article/details/129336509">PIE 和 SIE</a></li>
 </ul>
@@ -106,7 +110,7 @@ PIE的意思是：Play，玩。你做的游戏是如何让玩家操控游玩的�
 <p>PIE和SIE切换
 在PIE模式下，shift + F1可以获得鼠标控制权（一般第一人称第三人称下鼠标用于旋转方向摄像头，不会出现光标）。然后点击工具栏的弹出（Eject）可以切换到SIE</p>
 <p>你也可以点击 控制（Possess） 功能的快捷键（F10）来从在编辑器中模拟（SIE）切换到在编辑器中运行（PIE）。</p>
-<h2 id="_7">加速构建过程</h2>
+<h2 id="_10">加速构建过程</h2>
 <p>每次执行hutb的make的操作时，都会出现
 <div class="highlight"><pre><span></span><code>Using &#39;git status&#39; to determine working set for adaptive non-unity build (D:\work\workspace\UnrealEngine).
 Waiting for &#39;git status&#39; command to complete
@@ -128,12 +132,73 @@ UnrealBuildTool: WARNING: No Visual C++ installation was found. Please download 
 UnrealBuildTool: ERROR: Visual Studio 2019 must be installed in order to build this target.
 make: *** [CarlaUE4Editor] 错误 6
 </code></pre></div></p>
-<h2 id="_8">插件</h2>
+<h2 id="_11">插件</h2>
 <h3 id="usd">USD</h3>
 <p>Universal Scene Description (USD) 是通用场景描述，一个开放且可扩展的生态系统，用于在 3D 世界中描述、组合、模拟和协作，最初由皮克斯动画工作室发明；是 Omniverse 使用的文件格式，人称元宇宙的 HTML。</p>
 <p>什么是仿真就绪（SimReady）素材</p>
 <p>仿真就绪（SimReady）素材是虚拟世界的基础模块，SimReady 素材不仅仅是 3D 物件，它们包含基于 Universal Scene Description (USD) 构建的准确物理属性、行为和连接的数据流。</p>
-<h2 id="_9">参考链接</h2>
+<h2 id="_12">编译</h2>
+<h6 id="airsim">编译AirSim后，启动编译器崩溃</h6>
+<p>报错信息：
+<div class="highlight"><pre><span></span><code>Assertion failed: ResourceTableFrameCounter == INDEX_NONE [File:D:/work/workspace/UnrealEngine/Engine/Source/Runtime/Windows/D3D11RHI/Private/D3D11Texture.cpp] [Line: 2260]
+
+UE4Editor_Core!AssertFailedImplV() [D:\work\workspace\UnrealEngine\Engine\Source\Runtime\Core\Private\Misc\AssertionMacros.cpp:104]
+UE4Editor_Core!FDebug::CheckVerifyFailedImpl() [D:\work\workspace\UnrealEngine\Engine\Source\Runtime\Core\Private\Misc\AssertionMacros.cpp:461]
+UE4Editor_D3D11RHI!FD3D11DynamicRHI::RHIUpdateTextureReference() [D:\work\workspace\UnrealEngine\Engine\Source\Runtime\Windows\D3D11RHI\Private\D3D11Texture.cpp:2260]
+UE4Editor_RHI!FRHICommandListImmediate::UpdateTextureReference() [D:\work\workspace\UnrealEngine\Engine\Source\Runtime\RHI\Private\RHICommandList.cpp:2730]
+UE4Editor_Engine!FStreamableTextureResource::FinalizeStreaming() [D:\work\workspace\UnrealEngine\Engine\Source\Runtime\Engine\Private\Rendering\StreamableTextureResource.cpp:220]
+UE4Editor_Engine!FTexture2DUpdate::DoFinishUpdate() [D:\work\workspace\UnrealEngine\Engine\Source\Runtime\Engine\Private\Streaming\Texture2DUpdate.cpp:158]
+UE4Editor_Engine!FTexture2DStreamIn_DDC_AsyncCreate::Finalize() [D:\work\workspace\UnrealEngine\Engine\Source\Runtime\Engine\Private\Streaming\Texture2DStreamIn_DDC_AsyncCreate.cpp:84]
+UE4Editor_Engine!TRenderAssetUpdate&lt;FTexture2DUpdateContext&gt;::TickInternal() [D:\work\workspace\UnrealEngine\Engine\Source\Runtime\Engine\Private\Streaming\RenderAssetUpdate.inl:76]
+UE4Editor_Engine!&lt;lambda_c13beac94fedf293002b1e0b20710a81&gt;::operator()() [D:\work\workspace\UnrealEngine\Engine\Source\Runtime\Engine\Private\Streaming\RenderAssetUpdate.cpp:270]
+UE4Editor_Engine!TEnqueueUniqueRenderCommandType&lt;`FRenderAssetUpdate::ScheduleRenderTask&#39;::`2&#39;::RenderAssetUpdateCommandName,&lt;lambda_c13beac94fedf293002b1e0b20710a81&gt; &gt;::DoTask() [D:\work\workspace\UnrealEngine\Engine\Source\Runtime\RenderCore\Public\RenderingThread.h:183]
+UE4Editor_Engine!TGraphTask&lt;TEnqueueUniqueRenderCommandType&lt;`FRenderAssetUpdate::ScheduleRenderTask&#39;::`2&#39;::RenderAssetUpdateCommandName,&lt;lambda_c13beac94fedf293002b1e0b20710a81&gt; &gt; &gt;::ExecuteTask() [D:\work\workspace\UnrealEngine\Engine\Source\Runtime\Core\Public\Async\TaskGraphInterfaces.h:886]
+UE4Editor_Core!FNamedTaskThread::ProcessTasksNamedThread() [D:\work\workspace\UnrealEngine\Engine\Source\Runtime\Core\Private\Async\TaskGraph.cpp:709]
+UE4Editor_Core!FNamedTaskThread::ProcessTasksUntilQuit() [D:\work\workspace\UnrealEngine\Engine\Source\Runtime\Core\Private\Async\TaskGraph.cpp:601]
+UE4Editor_RenderCore!RenderingThreadMain() [D:\work\workspace\UnrealEngine\Engine\Source\Runtime\RenderCore\Private\RenderingThread.cpp:373]
+UE4Editor_RenderCore!FRenderingThread::Run() [D:\work\workspace\UnrealEngine\Engine\Source\Runtime\RenderCore\Private\RenderingThread.cpp:509]
+UE4Editor_Core!FRunnableThreadWin::Run() [D:\work\workspace\UnrealEngine\Engine\Source\Runtime\Core\Private\Windows\WindowsRunnableThread.cpp:86]
+</code></pre></div></p>
+<blockquote>
+<p><a href="https://github.com/carla-simulator/carla/issues/6201#issuecomment-1436199677">原因</a> ：把Ue4NoEditor的附加地图包和从源码编译的ue4editor搞混了，所以把附加地图的引擎文件夹文件放到了unreal4.26.2的文件夹里。</p>
+<p>未使用的 <a href="https://github.com/carla-simulator/carla/issues/6075#issuecomment-1623373687">暂时解决办法</a> ：直接注释掉 D3D11Texture.cpp 中引发错误的那行代码 (l. 2260) 。 或者 <a href="https://forums.unrealengine.com/t/ue-4-26-built-from-source-crashes-when-opening-project/739873/10">改配置文件</a></p>
+</blockquote>
+<p>Carla 编辑器运行崩溃：
+<div class="highlight"><pre><span></span><code>LoginId:bc22576a452b36c1831fe8942b55e57a
+EpicAccountId:77cf3795af004e58a037e9c9d4a5aa0d
+
+Unhandled Exception: EXCEPTION_STACK_OVERFLOW
+
+user32
+user32
+sdk_legacy_steering_wheel_x64
+user32
+user32
+sdk_legacy_steering_wheel_x64
+</code></pre></div></p>
+<h6 id="vs2022ue426">使用vs2022编译UE4.26时候报错</h6>
+<p><div class="highlight"><pre><span></span><code>LIN110 无法打开文件“D:\work\workspace\UnrealEngine\Engine\Binaries\Win64\UE4Editor-Engine.dll”
+LIN110 无法打开文件“D:\work\workspace\UnrealEngine\Engine\Binaries\Win64\UE4Editor-UnrealEd.dll”
+LIN110 无法打开文件“D:\work\workspace\UnrealEngine\Engine\Binaries\Win64\UE4Editor-Chaos.dll”
+LIN110 无法打开文件“D:\work\workspace\UnrealEngine\Engine\Binaries\Win64\UE4Editor-DetailCustomization.dll”
+</code></pre></div>
+在对应目录中存在。</p>
+<p><a href="https://forums.unrealengine.com/t/link-fatal-error-lnk1104-cannot-open-file/287530/11">解决</a> ：删除[ProjectPath]/Engine/Binaries/Win64下的所有文件，然后重新构建（如果少了文件，从原来的拷贝）。如果刪除不了，需要使用<code>资源监视器</code>删除对应的进程（UEEditor.exe）</p>
+<h6 id="detected-compiler-newer-than-visual-studio-2019-please-update-min-version-checking-in-windowsplatformcompilersetuph">编译警告：Detected compiler newer than Visual Studio 2019, please update min version checking in WindowsPlatformCompilerSetup.h</h6>
+<h5 id="cpu">如何修改编译使用的CPU核心数量</h5>
+<p>修改Engine\Saved\UnrealBuildTool\BuildConfiguration.xml文件中的配置：
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span>
+<span class="nt">&lt;Configuration</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;https://www.unrealengine.com/BuildConfiguration&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;ProjectFileGenerator&gt;</span>
+<span class="w">        </span><span class="nt">&lt;Format&gt;</span>VisualStudio2019<span class="nt">&lt;/Format&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/ProjectFileGenerator&gt;</span>
+<span class="w">    </span><span class="nt">&lt;ParallelExecutor&gt;</span>
+<span class="w">        </span><span class="nt">&lt;ProcessorCountMultiplier&gt;</span>0.75<span class="nt">&lt;/ProcessorCountMultiplier&gt;</span>
+<span class="w">        </span><span class="nt">&lt;MaxProcessorCount&gt;</span>24<span class="nt">&lt;/MaxProcessorCount&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/ParallelExecutor&gt;</span>
+<span class="nt">&lt;/Configuration&gt;</span>
+</code></pre></div></p>
+<h2 id="_13">参考链接</h2>
 <ul>
 <li>
 <p><a href="https://www.bilibili.com/video/BV164411Y732/?share_source=copy_web&amp;vd_source=d956d8d73965ffb619958f94872d7c57">UE4初学者系列教程合集-全中文新手入门教程</a></p>

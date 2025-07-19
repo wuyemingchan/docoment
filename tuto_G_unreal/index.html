@@ -83,6 +83,23 @@
 <p>绘制调用（draw call）：在计算机图形学中，指向图形处理器发送指令以绘制图形的过程。</p>
 <p>光栅化：找出三角形所覆盖到的像素；</p>
 <h2 id="_4">内容</h2>
+<h3 id="loading-screen"><a href="https://www.uejoy.com/archives/1071">实现加载等待页面Loading Screen设计（进度条异步加载）</a></h3>
+<p>启动软件会黑屏半天，或是切换地图黑屏一下，体验不好。</p>
+<p>黑屏是因为计算机在启动软件后需要加载磁盘资产，加载过程是需要时间消耗的，但是有时候需要加载的资产又多，然后磁盘读取效率又低，所以导致等待时间过长。在加载的时候，软件窗口是空闲的，但是又没有其他渲染任务，所以就黑屏了。</p>
+<p>加载进度条等待页面，有进度条可以直观看到加载进度情况。</p>
+<p>整个过程我们需要借助两个函数（全局函数）</p>
+<ul>
+<li>LoadPackageAsync：完成后台的异步加载</li>
+<li>GetAsyncLoadPercentage：获取加载过程中的完成进度（值0-100）</li>
+</ul>
+<p><a href="https://blog.csdn.net/qq_25580197/article/details/73460060">添加开场mp4视频</a></p>
+<p><a href="https://blog.csdn.net/qq_31263521/article/details/80567736">切换虚幻引擎启动时加载的图片Splash</a></p>
+<p>在<code>项目设置-&gt;平台-&gt;Windows-&gt;Splash-&gt;游戏启动画面</code>中进行图片选择。</p>
+<p>Icon默认为：<code>UnrealEngine\Engine\Build\Windows\Resources\Default.ico</code>；
+新建的Icon放在：<code>UnrealEngine\Engine\Content\Splash</code>。</p>
+<p>PPT编辑文字，导出PDF，然后裁剪，导出为图片。</p>
+<p>图片转icon：https://www.icoconverter.com/</p>
+<p>黑白反转：https://invert.imageonline.co/cn/</p>
 <h3 id="_5">编译</h3>
 <p><a href="https://docs.unrealengine.com/4.26/zh-CN/ProductionPipelines/DevelopmentSetup/BuildConfigurations/">编译配置参考</a></p>
 <h3 id="_6">像素流插件</h3>
@@ -107,6 +124,8 @@
 <li>源码控制-&gt;连接到源代码管理-&gt;Git；</li>
 <li>Git路径选择Git安装后bin文件中的启动程序；选择<code>接收设置</code></li>
 </ol>
+<h2 id="427-plus">[升级到 4.27-plus]</h2>
+<p><a href="https://github.com/EpicGames/UnrealEngine/commits/4.27-plus/?before=c79de00e3ba31b0b96220f8a0591a93d6770a3e3+665">Change version 4.27.1</a></p>
 <h2 id="_9"><a href="https://www.3dcat.live/share/ue4-vsualization-software/">法律风险</a></h2>
 <p>UE4虽然给了完整的源码，但并不意味着全部都能用于发布产品。</p>
 <p><a href="https://www.unrealengine.com/en-US/eula/publishing">条款</a> 阐述了许可授予的相关问题，其中明确规定了发布的产品中不能包含引擎内容和未经过打包的付费内容。</p>

@@ -145,12 +145,14 @@ make<span class="w"> </span>PythonAPI<span class="w"> </span><span class="o">&am
 <span class="c1">#####################################################</span>
 <span class="c1">############## 安装 DReyeVR 插件 ##############</span>
 <span class="c1">#####################################################</span>
-<span class="c1"># (可选) 安装 SRanipal (眼动跟踪) SRanipal plugin</span>
+<span class="c1"># (可选) 安装 SRanipal (眼动跟踪) SRanipal plugin </span>
+<span class="c1"># 安装手册：https://github.com/Tomaso-Zanardi/SRanipal-Eye-Tracking-Manual/tree/main</span>
 mv<span class="w"> </span>/PATH/TO/SRANIPALPLUGIN/SDK/03_Unreal/Plugins/SRanipal<span class="w"> </span>Unreal/CarlaUE4/Plugins/<span class="w"> </span>
 
-<span class="c1"># (可选) 安装 LogitechWheelPlugin (steering wheel)</span>
+<span class="c1"># (可选) 安装 LogitechWheelPlugin (steering wheel) </span>
+<span class="c1"># 已合并到 [hutb仓库](https://github.com/OpenHUTB/hutb/tree/hutb/Unreal/CarlaUE4/Plugins) </span>
 git<span class="w"> </span>clone<span class="w"> </span>https://github.com/HARPLab/LogitechWheelPlugin
-mv<span class="w"> </span>LogitechWheelPlugin/LogitechWheelPlugin<span class="w"> </span>Unreal/CarlaUE4/Plugins/<span class="w"> </span><span class="c1"># install to carla</span>
+mv<span class="w"> </span>LogitechWheelPlugin/LogitechWheelPlugin<span class="w"> </span>Unreal/CarlaUE4/Plugins/<span class="w"> </span><span class="c1"># 安装到 carla</span>
 
 <span class="nb">cd</span><span class="w"> </span>..<span class="w"> </span><span class="c1"># 回到主目录</span>
 
@@ -179,10 +181,10 @@ make<span class="w"> </span>check<span class="w"> </span><span class="nv">CARLA<
 <span class="c1">################## 构建所有 #########################</span>
 <span class="c1">#####################################################</span>
 <span class="nb">cd</span><span class="w"> </span>carla
-make<span class="w"> </span>PythonAPI<span class="w">  </span><span class="c1"># build the PythonAPI (and LibCarla) again</span>
-make<span class="w"> </span>launch<span class="w">     </span><span class="c1"># launch in editor</span>
-make<span class="w"> </span>package<span class="w">    </span><span class="c1"># create an optimized package</span>
-make<span class="w"> </span>check<span class="w">      </span><span class="c1"># run Carla unit tests</span>
+make<span class="w"> </span>PythonAPI<span class="w">  </span><span class="c1"># 再次构建 PythonAPI (和 LibCarla)</span>
+make<span class="w"> </span>launch<span class="w">     </span><span class="c1"># 启动虚幻编辑器</span>
+make<span class="w"> </span>package<span class="w">    </span><span class="c1"># 创建优化过的包</span>
+make<span class="w"> </span>check<span class="w">      </span><span class="c1"># 运行 Carla 单元测试</span>
 </code></pre></div>
 </details>
 
@@ -196,7 +198,7 @@ make<span class="w"> </span>check<span class="w">      </span><span class="c1">#
 <span class="p">...</span>
 <span class="c1">/////////////////////////////////////////////////////////////</span>
 </code></pre></div>
-- 注意：仅当启用了 <code>UseSRanipalPlugin</code> 时才需要安装 SRanipal 插件，同样，仅当启用了 <code>UseLogitechPlugin</code> 时才需要安装 Logitech 插件。</p>
+- 注意：仅当启用了 <code>UseSRanipalPlugin</code> 时才需要安装 SRanipal 插件，同样，仅当启用了 <code>UseLogitechPlugin</code> 时才需要安装 Logitech 插件（插件已合并到 <a href="https://github.com/OpenHUTB/hutb/tree/hutb/Unreal/CarlaUE4/Plugins">hutb仓库</a> 中）。</p>
 <div class="admonition 注意">
 <p class="admonition-title">注意</p>
 <p>在虚幻编辑器中运行时，需要点击工具栏中的 <a href="https://dev.epicgames.com/documentation/zh-cn/unreal-engine/playing-and-simulating?application_version=4.27"><code>控制</code></a> （显示<code>弹出</code>）才有进入驾驶模式。每次点击<code>控制</code>都会调用 <code>carla\unreal\carlaue4\Source\CarlaUE4\DReyeVR\DReyeVRPawn.cpp</code> 文件中 <code>void ADReyeVRPawn::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)</code> 的 <code>Super::SetupPlayerInputComponent(PlayerInputComponent);</code>，每次持有棋子时都会调用一次，从而 InputComponent 不为空。 </p>
@@ -259,7 +261,7 @@ make<span class="w"> </span>check<span class="w">      </span><span class="c1">#
 </ol>
 <h3 id="sranipal-ue4"><strong>安装 SRanipal UE4 插件</strong></h3>
 <ul>
-<li>下载 <code>.zip</code> 文件后，解压后应出现类似如下的目录</li>
+<li>下载 <code>.zip</code> 文件后，解压后应出现类似如下的目录（相关 <a href="https://github.com/VARID-XR/VARID-plugin-unreal">链接</a> ,<code>software/VR/*</code>）</li>
 </ul>
 <div class="highlight"><pre><span></span><code>SDK
 - 01_C/
