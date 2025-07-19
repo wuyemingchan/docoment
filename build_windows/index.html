@@ -158,8 +158,8 @@ pip3<span class="w"> </span>install<span class="w"> </span>--user<span class="w"
 <p>从版本 0.9.12 开始，Carla 使用虚幻引擎 4.26 的修改版。该分支包含 Carla 特定的补丁。</p>
 <p>请注意，要下载虚幻引擎的这个分支，<strong>您需要有一个链接到虚幻引擎帐户的 GitHub 帐户</strong> 。如果您没有进行此设置，请先按照 <a href="https://www.unrealengine.com/en-US/ue4-on-github">本指南</a> 进行操作，然后再继续操作。</p>
 <p>要构建虚幻引擎的修改版本：</p>
-<p><strong>1.</strong> 在Git终端中，导航到要保存虚幻引擎的位置并克隆 <em>carla</em> 分支：</p>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-b<span class="w"> </span>carla<span class="w"> </span>https://github.com/CarlaUnreal/UnrealEngine.git<span class="w"> </span>.
+<p><strong>1.</strong> 在Git终端中，导航到要保存虚幻引擎的位置并克隆 <em>carla</em> 分支（需要加入社区）：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-b<span class="w"> </span>carla<span class="w"> </span>https://github.com/OpenHUTB/UnrealEngine.git<span class="w"> </span>.
 </code></pre></div>
 <p>或者打开 <a href="https://github.com/CARLAUnreal/UnrealEngine">UnrealEngine</a> 进行项目文件下载：
 <img alt="" src="../img/build/unreal_engine_download.png" /></p>
@@ -175,7 +175,7 @@ GenerateProjectFiles.bat
 <blockquote>
 <ol>
 <li>
-<p>使用 Visual Studio 2019打开源文件夹内的文件<code>UE4.sln</code>。</p>
+<p>使用 Visual Studio 2019 （或 Visual Studio 2022）打开源文件夹内的文件<code>UE4.sln</code>。</p>
 </li>
 <li>
 <p>在构建栏中，确保您已选择<code>Development Editor</code>、<code>Win64</code>和<code>UnrealBuildTool</code>选项。如果您需要任何帮助，请查看 <a href="https://docs.unrealengine.com/en-US/ProductionPipelines/DevelopmentSetup/BuildingUnrealEngine/index.html">本指南</a> 。</p>
@@ -565,6 +565,7 @@ Error: could not load cache
 
   <div role="contentinfo">
     <!-- Copyright etc -->
+      <p>OpenHUTB 版权所有 &copy; 2025</p>
   </div>
 
   Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
