@@ -249,9 +249,10 @@ GenerateProjectFiles.bat
 <p>该<code>master</code>分支包含 Carla 的当前版本以及最新的修复和功能。以前的 Carla 版本标有版本名称。永远记住使用命令<code>git branch</code>检查 git 中的当前分支。</p>
 </div>
 <h3 id="_7">获取资产 <span id="get-assets"></span></h3>
-<p>通过在 Carla 根文件夹中运行以下命令，下载 <strong>最新的</strong> 资产以使用当前版本的 Carla：</p>
+<p>下载 <a href="https://pan.baidu.com/s/1n2fJvWff4pbtMe97GOqtvQ?pwd=hutb">链接</a> 中<code>software/data/Content.zip</code> 的 <strong>最新的</strong> 资产（或者 <a href="http://172.20.46.154:8090/traffic/Content">湖工商内网仓库链接</a> ，可下载和修改资产）：</p>
+<p>（原 Carla 资产通过在 根文件夹中运行以下命令）
 <div class="highlight"><pre><span></span><code>Update.bat
-</code></pre></div>
+</code></pre></div></p>
 <p>如果安装了 7zip，资源将被下载并解压到适当的位置。如果您没有安装此软件，则需要手动将文件内容解压到<code>Unreal\CarlaUE4\Content\Carla</code>。</p>
 <p>要下载 <strong>特定版本</strong> Carla 的资源：</p>
 <ol>
@@ -264,8 +265,6 @@ GenerateProjectFiles.bat
 </code></pre></div>
 下载好后解压到下图这个文件夹（注意是把所有解压的文件放到<code>Unreal/CARLAUE4/Content/CARLA</code> 下，不是刚刚下载的压缩包解压到当前文件夹）像下面这样格式。否则后面执行 make launch 会失败。
 <img alt="" src="../img/build/extracted_content.png" /></p>
-<p>! 笔记
-    湖工商内网使用仓库 <a href="http://172.20.46.154:8090/traffic/Content">http://172.20.46.154:8090/traffic/Content</a> 进行资产的克隆，已获取最新的资产。</p>
 <h3 id="carla_2">构建 Carla <span id="build-carla"></span></h3>
 <p>本节概述了构建 Carla 的命令。</p>
 <ul>
