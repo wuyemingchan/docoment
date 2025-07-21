@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>CARLA OpenDriveParser 说明文档 - 人车模拟</title>
+    <title>OpenDriveParser 说明文档 - 人车模拟</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,7 +13,7 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "CARLA OpenDriveParser \u8bf4\u660e\u6587\u6863";
+        var mkdocs_page_name = "OpenDriveParser \u8bf4\u660e\u6587\u6863";
         var mkdocs_page_input_path = "modules/opendirve.md";
         var mkdocs_page_url = null;
       </script>
@@ -58,7 +58,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">CARLA OpenDriveParser 说明文档</li>
+      <li class="breadcrumb-item active">OpenDriveParser 说明文档</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/OpenHUTB/doc/edit/master/docs/modules/opendirve.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
@@ -68,8 +68,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="carla-opendriveparser">CARLA OpenDriveParser 说明文档</h1>
-<p>本文件定义了 CARLA 模拟器中用于解析 OpenDRIVE 地图数据的 OpenDriveParser 类。该类位于 carla::opendrive 命名空间中，主要职责是从 OpenDRIVE XML 文件中读取道路网络数据，并将其转换为 CARLA 内部表示形式。</p>
+                <h1 id="opendriveparser">OpenDriveParser 说明文档</h1>
+<p>本文件定义了人车模拟器中用于解析 OpenDRIVE 地图数据的 OpenDriveParser 类。该类位于 carla::opendrive 命名空间中，主要职责是从 OpenDRIVE XML 文件中读取道路网络数据，并将其转换为内部表示形式。</p>
 <h2 id="opendrive">什么是 OpenDRIVE？</h2>
 <p><a href="https://www.asam.net/standards/detail/opendrive/">点击这里访问ASAM OpenDRIVE</a></p>
 <p><strong>OpenDRIVE</strong> 是由 <strong>VIRES Simulationstechnologie GmbH</strong> 提出的开放标准，用于描述道路网络的结构化信息，广泛用于驾驶仿真系统（如 CARLA、SUMO、VTD 等）。</p>
@@ -102,7 +102,7 @@
 <span class="p">}</span>
 </code></pre></div>
 该类位于 carla::opendrive 命名空间下。</p>
-<h2 id="opendriveparser">类定义详解：OpenDriveParser</h2>
+<h2 id="opendriveparser_1">类定义详解：OpenDriveParser</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">OpenDriveParser</span>
 </code></pre></div>
 <h3 id="_3">简介</h3>
@@ -213,7 +213,7 @@
 地图名称与版本号，
 创建时间，
 原始坐标系统（可用于坐标投影）。</p>
-<h3 id="opendriveparser_1">与 OpenDriveParser 的关系</h3>
+<h3 id="opendriveparser_2">与 OpenDriveParser 的关系</h3>
 <p>1.Map 是 OpenDriveParser::Load() 的直接返回结果。</p>
 <p>2.OpenDriveParser 完整解析 OpenDRIVE XML 文件，重建出结构化的 Map 对象，供 CARLA 世界使用。</p>
 <p>换言之，OpenDriveParser 是“入口”，而 Map 是“出口”。</p>
@@ -238,8 +238,8 @@
 <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">xodr_contents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ReadFile</span><span class="p">(</span><span class="s">&quot;Town01.xodr&quot;</span><span class="p">);</span>
 <span class="n">carla</span><span class="o">::</span><span class="n">opendrive</span><span class="o">::</span><span class="n">Map</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">carla</span><span class="o">::</span><span class="n">opendrive</span><span class="o">::</span><span class="n">OpenDriveParser</span><span class="o">::</span><span class="n">Load</span><span class="p">(</span><span class="n">xodr_contents</span><span class="p">);</span>
 </code></pre></div></h2>
-<h1 id="opendriveparsercpp-carla">OpenDriveParser.cpp 源文件说明（CARLA）</h1>
-<p>该文件实现了 CARLA 项目中 OpenDRIVE 格式地图解析的核心模块：<code>OpenDriveParser</code>。它负责从 OpenDRIVE XML 字符串中解析并构建 CARLA 中的道路网络地图对象（<code>road::Map</code>）。</p>
+<h1 id="opendriveparsercpp">OpenDriveParser.cpp 源文件说明</h1>
+<p>该文件实现了 人车模拟器 项目中 OpenDRIVE 格式地图解析的核心模块：<code>OpenDriveParser</code>。它负责从 OpenDRIVE XML 字符串中解析并构建 HUTB 中的道路网络地图对象（<code>road::Map</code>）。</p>
 <hr />
 <h2 id="_14">文件位置</h2>
 <p><div class="highlight"><pre><span></span><code>carla/opendrive/OpenDriveParser.cpp
