@@ -105,7 +105,7 @@ y_{d} = \frac{\theta_d}{\gamma} \times y
 <p>更新3个虚幻引擎的源代码：</p>
 <ul>
 <li>
-<p><a href="https://github.com/OpenHUTB/UnrealEngine/blob/fisheye-camera/Engine/Shaders/Private/SimpleElementPixelShader.usf"><code>Engine/Shaders/Private/SimpleElementPixelShader.usf</code></a></p>
+<p><a href="https://github.com/OpenHUTB/engine/blob/hutb/Engine/Shaders/Private/SimpleElementPixelShader.usf"><code>Engine/Shaders/Private/SimpleElementPixelShader.usf</code></a></p>
 <p>Unreal Shader(.usf, 着色器) 文件。 其中函数<code>void CubemapTexturePropertiesFisheye()</code>实现了鱼眼相机的畸变模型：
 <script type="math/tex; mode=display"> 
 x = x_d \frac{r}{\theta _d} = \frac{r}{\theta (1 + k_1 \theta^2 + k_2 \theta^4 + k_3 \theta^6 + k_4 \theta^8)}  
@@ -113,9 +113,9 @@ x = x_d \frac{r}{\theta _d} = \frac{r}{\theta (1 + k_1 \theta^2 + k_2 \theta^4 +
 <a href="https://github.com/OpenHUTB/UnrealEngine/blob/83a7677378ff770073ca9544460a02d264a3ce46/Engine/Shaders/Private/SimpleElementPixelShader.usf#L410">代码实现</a> ：<code>theta = r / (1.0f + d1*th2 + d2*th4 + d3*th6 + d4*th8);</code>。</p>
 </li>
 <li>
-<p><a href="https://github.com/OpenHUTB/UnrealEngine/blob/fisheye-camera/Engine/Source/Runtime/Engine/Private/CubemapUnwrapUtils.cpp"><code>Engine/Source/Runtime/Engine/Private/CubemapUnwrapUtils.cpp</code></a></p>
+<p><a href="https://github.com/OpenHUTB/engine/blob/hutb/Engine/Source/Runtime/Engine/Private/CubemapUnwrapUtils.cpp"><code>Engine/Source/Runtime/Engine/Private/CubemapUnwrapUtils.cpp</code></a></p>
 </li>
-<li><a href="https://github.com/OpenHUTB/UnrealEngine/blob/fisheye-camera/Engine/Source/Runtime/Engine/Public/CubemapUnwrapUtils.h"><code>Engine/Source/Runtime/Engine/Public/CubemapUnwrapUtils.h</code></a></li>
+<li><a href="https://github.com/OpenHUTB/engine/blob/hutb/Engine/Source/Runtime/Engine/Public/CubemapUnwrapUtils.h"><code>Engine/Source/Runtime/Engine/Public/CubemapUnwrapUtils.h</code></a></li>
 </ul>
 <h3 id="1-">1- 创建新传感器 <span id="1-sensor-actor"></span></h3>
 <p>为新的 C++ 类创建两个文件：</p>
