@@ -155,6 +155,14 @@
 MakeShared（包括用于TUniquePtr的 <a href="https://zhuanlan.zhihu.com/p/433605801">MakeUnique</a> ）：类似于C++中的 std::make_shared ，比直接用普通指针创建效率更高，因为智能指针内存包含两部分，除了数据本身的内存之外，还有一个控制块内存，普通指针创建时，会分别申请两次内存，而使用 MakedShared 只需要进行一次内存申请，因而效率更高。</p>
 <p>MakeUnique 使用给定的参数分配一个类型 T 的新对象并将其作为 TUniquePtr 返回。</p>
 <p>TCHAR_TO_UTF8(const TCHAR*): unicode到utf8的转换</p>
+<h2 id="faq">FAQ</h2>
+<h6 id="vs-2022-engineenginepluginsmarketplacecesiumforunrealsourcethirdpartyincludecesiumgeospatials2cellidherror-2039-string-std"># VS 2022 编译时<code>engine\Engine\Plugins\Marketplace\CesiumForUnreal\Source\ThirdParty\include\CesiumGeospatial\S2CellID.h</code>报错：<code>error 2039: "string": 不是 "std" 的成员</code></h6>
+<blockquote>
+<p>原因：问题源于 VS2019 后的语法检查更加严格，缺少必要的头文件</p>
+<p>解决：增加头文件：
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span>
+</code></pre></div></p>
+</blockquote>
 <h2 id="_7">参考</h2>
 <ul>
 <li><a href="https://zhuanlan.zhihu.com/p/365834299">Cesium for Unreal快速入门</a></li>

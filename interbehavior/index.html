@@ -79,7 +79,7 @@
 
 <p>该模块扩展了 <a href="https://github.com/OpenHUTB/carla"><code>Carla</code></a> 模拟器，增加了虚拟现实集成、第一人称可操纵的自主车辆、眼动追踪支持和多种沉浸感增强功能。</p>
 <p>如果您有任何疑问，希望我们的常见问题解答 <a href="https://github.com/HARPLab/DReyeVR/wiki/Frequently-Asked-Questions">F.A.Q. 维基页面</a> 和 <a href="https://github.com/HARPLab/DReyeVR/issues?q=is%3Aissue+is%3Aclosed">问题页面</a> 可以解答其中的一些问题。</p>
-<p><strong>重要提示：</strong> 目前 DReyeVR 仅支持 Carla 版本：<a href="https://github.com/carla-simulator/carla/tree/0.9.13">0.9.13</a> 、<a href="https://github.com/OpenHUTB/carla">OpenHUTB</a> 和 Unreal Engine 4.26。</p>
+<p><strong>重要提示：</strong> 目前 DReyeVR 仅支持基于 Unreal Engine 4.26 的 Carla 版本：<a href="https://github.com/carla-simulator/carla/tree/0.9.13">0.9.13</a> 、<a href="https://github.com/OpenHUTB/hutb">HUTB</a> 。</p>
 <h2 id="_2">亮点</h2>
 <h3 id="_3">自主车辆</h3>
 <p><a href="https://github.com/ValveSoftware/steamvr_unreal_plugin/tree/4.23">集成 SteamVR</a> 的完全可驾驶<strong>虚拟现实自主车辆</strong>（参见 <a href="https://github.com/OpenHUTB/carla/blob/OpenHUTB/Unreal/CarlaUE4/Source/CarlaUE4/DReyeVR/EgoVehicle.h">EgoVehicle.h</a> ）</p>
@@ -142,10 +142,10 @@
 <p>速度计（默认单位为英里/小时）</p>
 </li>
 <li>
-<p>档位指示器</p>
+<p>档位指示器：显示的 D(Drive) 为前进档、R(Reverse) 为倒档，按键盘<code>Z</code>进行切换</p>
 </li>
 <li>
-<p>转向信号</p>
+<p>转向信号：按<code>Q</code>为左转向、按<code>E</code>为右转向</p>
 </li>
 </ul>
 </li>
@@ -327,7 +327,7 @@
 </ul>
 </li>
 <li>此外，我们使用的 <a href="https://github.com/HARPLab/LogitechWheelPlugin">LogitechWheelPlugin</a> 目前仅支持 Windows。不过，根据 <a href="https://wiki.archlinux.org/title/Logitech_Racing_Wheel">Arch Wiki</a> ，应该可以在 Linux 上使用 G923。</li>
-<li>此外，尽管 CARLA 并未正式支持 MacOS，但我们在 Apple Silicon 机器上进行了开发，并且拥有 CARLA + UE4.26 的活跃分支，支持 MacOS 12+。请注意，这主要用于开发，因为它是迄今为止最受限制的系统。</li>
+<li>此外，尽管 Carla 并未正式支持 MacOS，但我们在 Apple Silicon 机器上进行了开发，并且拥有 Carla + UE4.26 的活跃分支，支持 MacOS 12+。请注意，这主要用于开发，因为它是迄今为止最受限制的系统。</li>
 </ul>
 <h2 id="_8">文档 &amp; 指南</h2>
 <p>使用方法：

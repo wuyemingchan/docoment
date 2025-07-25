@@ -267,6 +267,18 @@ export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI/carla
 <h2 id="windows_1">Windows 构建</h2>
 <!-- ======================================================================= -->
 
+<h6 id="buildcarlaue4bat-jenkins">BuildCarlaUE4.bat 在jenkins的日志中中文乱码</h6>
+<p>日志乱码开始出现的地方：
+<div class="highlight"><pre><span></span><code>-[BuildCarlaUE4]: Building Unreal Editor...
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>call<span class="w"> </span><span class="s2">&quot;%UE4_ROOT%Engine\Build\BatchFiles\Build.bat&quot;</span>^
+<span class="w">    </span>CarlaUE4Editor^
+<span class="w">    </span>Win64^
+<span class="w">    </span>Development^
+<span class="w">    </span>-WaitMutex^
+<span class="w">    </span>-FromMsBuild^
+<span class="w">    </span><span class="s2">&quot;%ROOT_PATH%Unreal/CarlaUE4/CarlaUE4.uproject&quot;</span>
+</code></pre></div>
 <h6 id="simready-converter-plugins-wheeledvehicleh">添加 SimReady Converter Plugins 后报错：<a href="无法打开包括文件: “WheeledVehicle.h”">无法打开包括文件: “WheeledVehicle.h”</a></h6>
 <p>完整报错信息：<code>C:\workspace\carla\Unreal\CarlaUE4\Plugins\Carla\Source\Carla\Vehicle/CarlaWheeledVehicle.h(9): fatal error C1083: 无法打开包括文件: “WheeledVehicle.h”: No such file or directory</code></p>
 <h6 id="make-pythonapibuildlibwin-amd64-cpython-37carlalibcarlacp37-win_amd64pyd-fatal-error-lnk1169"><a href="https://github.com/carla-simulator/carla/issues/3621">使用make PythonAPI编译报错：build\lib.win-amd64-cpython-37\carla\libcarla.cp37-win_amd64.pyd : fatal error LNK1169: 找到一个或多个多重定义的符号</a></h6>
